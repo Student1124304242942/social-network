@@ -11,8 +11,8 @@ interface ProfileData {
   age: number;
   skills: string[];
   country: string;
-  avatar: Blob | Uint8Array | ArrayBuffer;
-  profileImage: Blob | Uint8Array | ArrayBuffer;
+  avatar: Blob ;
+  profileImage: Blob  ;
 }
 
 const EditProfileModal: React.FC<EditProfileModalProps> = ({ profileData, onSubmit, onClose }) => {
@@ -49,7 +49,7 @@ const EditProfileModal: React.FC<EditProfileModalProps> = ({ profileData, onSubm
   };
 
   return (
-    <div className="p-4 bg-white rounded shadow-md w-80">
+    <div className="p-4 bg-white rounded shadow-md w-80 flex flex-col items-center justify-center">
       <h2 className="text-lg font-semibold mb-4">Edit Profile</h2>
       <form onSubmit={handleSubmit}>
         <input
@@ -71,7 +71,7 @@ const EditProfileModal: React.FC<EditProfileModalProps> = ({ profileData, onSubm
         <input
           type="text"
           name="skills"
-          value={formData.skills.join(",")}
+          value={formData.skills}
           onChange={handleChange}
           placeholder="Skills (comma separated)"
           className="w-full mb-3 p-2 border border-gray-300 rounded"

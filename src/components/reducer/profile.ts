@@ -13,7 +13,7 @@ const initialState: ProfileState = {
 
 export const editProfile = createAsyncThunk(
     'profile/edited',
-    async (params: { name: string, age: number, skills: string[], country: string, avatar: Blob | Uint8Array | ArrayBuffer, profileImage: Blob | Uint8Array | ArrayBuffer }, thunkAPI) => {
+    async (params: { name: string, age: number, skills: string[], country: string, avatar: Blob  , profileImage: Blob   }, thunkAPI) => {
         const userId: string | undefined = loadState('userID');
         const { name, age, skills, country, avatar, profileImage } = params;
         try {
@@ -35,7 +35,6 @@ export const profileSlice = createSlice({
     name: 'Editedprofile',
     initialState,
     reducers: {
-        
     },
     extraReducers: (builder) => {
         builder.addCase(editProfile.fulfilled, (state, action) => {

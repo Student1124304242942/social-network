@@ -1,7 +1,7 @@
 export interface ProfileCardProps {
-    profileImage: Blob | Uint8Array | ArrayBuffer;
+    profileImage: Blob;
     name: string;
-    avatar: Blob | Uint8Array | ArrayBuffer;
+    avatar: Blob ;
     age: number;
     skills: string[];
     country: string;
@@ -9,18 +9,18 @@ export interface ProfileCardProps {
 
 
 export interface ProfileCardProps1 {
-    profileImage:Blob | Uint8Array | ArrayBuffer;
+    profileImage:Blob  ;
     name: string ;
-    avatar: Blob | Uint8Array | ArrayBuffer;
+    avatar: Blob  ;
     age: number;
     skills: string[] ;
     country: string ;
 }
 
 export interface ProfileCardProps2 {
-    profileImage:Blob | Uint8Array | ArrayBuffer;
+    profileImage:Blob  ;
     name: string;
-    avatar:  Blob | Uint8Array | ArrayBuffer;
+    avatar:  Blob  ;
     age: number;
     skills: string[];
     country: string;

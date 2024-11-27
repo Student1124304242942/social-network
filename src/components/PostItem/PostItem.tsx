@@ -8,9 +8,9 @@ import ChangeIcon from '@/Icons/Change.svg';
 import { useDispatch } from 'react-redux';
 import { AppDispatch } from '../reducer/network';
 import { deletePost, correctPost } from '../reducer/post';
-import { FormValues, FormValidation } from '@/app/network/post/page';
+import { FormValues, FormValidation } from '@/app/(nentwork)/post/page';
 
-const PostItem = ({ postId, title, children, onDelete, ...props }: DivProps): JSX.Element => {
+const PostItem = ({ postId, title, children, time, onDelete, ...props }: DivProps & { time: number }): JSX.Element => {
   const dispatch = useDispatch<AppDispatch>();
   const [input, setInput] = useState<boolean>(false);
   const [isValid, setIsValid] = useState<FormValidation>({
@@ -68,7 +68,8 @@ const PostItem = ({ postId, title, children, onDelete, ...props }: DivProps): JS
   useEffect(() => {
     setNewValue({ text: children, title });
   }, [children, title]);
-
+ 
+  const formattedTime = new Intl.DateTimeFormat('ru-RU').format(time); 
   return (
     <div 
       {...props} 
@@ -76,7 +77,10 @@ const PostItem = ({ postId, title, children, onDelete, ...props }: DivProps): JS
     >
       <div className='mt-5'>
         {!input ? (
-          <H tag='h3' appearance='bl' weight={600}>{newValue.title}</H>
+          <>
+            <H tag='h3' appearance='bl' weight={600}>{newValue.title}</H>
+            <p className="text-gray-500 text-sm">{formattedTime}</p> {/* Отображение времени */}
+          </>
         ) : (
           <input 
             className='bg-gray-200 border border-gray-400 rounded-md p-2  focus:outline-none focus:ring-2 focus:ring-blue-500 transition min-w-full'

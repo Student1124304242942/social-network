@@ -9,12 +9,15 @@ export interface User {
 }
  
 interface UserState {
-    users: User[];  
+    users: User[];
+    allUsers: User[]; 
 }
- 
+
 const initialState: UserState = {
     users: [],
+    allUsers: [],
 };
+
  
 export const fetchUsers = createAsyncThunk<User[], void>(
     'network/users',
@@ -32,19 +35,24 @@ const userSlice = createSlice({
     reducers: {
         setUsers: (state, action) => {
             state.users = action.payload; 
-        }
+        },
+        filterUsers: (state, action) => {
+            const searchTerm = action.payload.toLowerCase();
+            const filteredUsers = state.allUsers.filter(user => 
+                user.name.toLowerCase().includes(searchTerm) || 
+                user.skills.some(skill => skill.toLowerCase().includes(searchTerm))
+            );
+            state.users = filteredUsers;
+        }        
     },
     extraReducers: (builder) => {
         builder.addCase(fetchUsers.fulfilled, (state, action) => {
             state.users = action.payload; 
-        });
-        builder.addCase(fetchUsers.rejected, (state, action) => {
-            console.error("Error fetching users:", action.error);
-        });
+            state.allUsers = action.payload; 
+        });        
     }
 });
 
-// Export actions and reducer
 export const userSliceActions = userSlice.actions;
 export default userSlice.reducer;
 

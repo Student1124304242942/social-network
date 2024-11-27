@@ -12,6 +12,7 @@ const config: Config = {
         '3xl': '1920px'
       },
       animation: {
+        'scale-up': 'scale(1.01) 0.2s ease-in-out forwards',
         'spin-slower': 'spin 7s linear infinite',
         'spin-slow': 'spin 5s linear infinite',
       },

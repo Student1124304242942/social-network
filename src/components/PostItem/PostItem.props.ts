@@ -5,5 +5,5 @@ export interface DivProps extends DetailedHTMLProps<HTMLAttributes<HTMLDivElemen
     children: string;
     postId:number,
     title:string,
-    onDelete:onDeleteType;
+    onDelete?:onDeleteType;
 }

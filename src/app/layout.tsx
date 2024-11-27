@@ -1,8 +1,9 @@
 'use client'
-import type { Metadata } from "next";
 import localFont from "next/font/local";
 import "./globals.css";
 import { BrowserRouter } from "react-router-dom";
+import { Provider } from "react-redux";
+import { network } from "@/components/reducer/network";
 
 const geistSans = localFont({
   src: "./fonts/GeistVF.woff",
@@ -23,12 +24,14 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <BrowserRouter>
-        <body
-          className={`${geistSans.variable} ${geistMono.variable} antialiased`}
-        >
-          {children}
-        </body>
+      <BrowserRouter>    
+        <Provider store={network}>
+          <body
+              className={`${geistSans.variable} ${geistMono.variable} antialiased`}
+            >
+              {children}
+            </body>
+        </Provider>
       </BrowserRouter>
     </html>
   );
