@@ -81,7 +81,7 @@ const Page = () => {
           </div>
           <div className='w-full'>
             <div className="flex justify-between mb-6">
-              <Link href='/auth/register' className="text-gray-400 hover:text-black transition duration-500">нету аккаунта ?</Link>
+              <Link href='/register' className="text-gray-400 hover:text-black transition duration-500">нету аккаунта ?</Link>
             </div>
             <Button>Войти</Button>
           </div>

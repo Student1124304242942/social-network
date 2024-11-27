@@ -2,26 +2,26 @@
 import React, { useEffect, useState } from 'react';
 import { Api } from "@/firebase";
 import { H } from '@/components/Htag/H';
-import { useDispatch, useSelector } from 'react-redux';
-import { AppDispatch, RootState } from '@/components/reducer/network';
+import { useDispatch,  } from 'react-redux';
+import { AppDispatch,  } from '@/components/reducer/network';
 import { sendMessage } from '@/components/reducer/chat';
 import Image from 'next/image';
-import { getMessage } from '@/components/reducer/chat';
+/* import { getMessage } from '@/components/reducer/chat'; */
 const Page = ({ params }: { params: { chat: string } }) => {
   const id = params.chat as string;
   const dispatch = useDispatch<AppDispatch>();
   const recipientId = id.slice(0, 28);
   const userId = id.slice(28);
-  const recipientMessagesRD = useSelector((state:RootState) => state.chat.messageReceived);
-  const newRecipientMessages = useSelector((state:RootState) => state.chat.newMessage);
+/*   const recipientMessagesRD = useSelector((state:RootState) => state.chat.messageReceived);
+  const newRecipientMessages = useSelector((state:RootState) => state.chat.newMessage); */
   const [messages, setMessages] = useState<{ text: string; avatar: string | null; name: string }[]>([]);
   const [loading, setLoading] = useState(true);
   const [messageInput, setMessageInput] = useState<string>('');
   const [isSending, setIsSending] = useState<boolean>(false);
   const [chatName, setChatName] = useState<string>('Чат');
   const [avatarUrl, setAvatarUrl] = useState<string | null>(null); 
-  const [receivedMessages, setReceivedMessages]= useState<{ text: string; avatar: string | null; name: string }[]>([]);
-  useEffect(() => {
+  /* const [receivedMessages, setReceivedMessages]= useState<{ text: string; avatar: string | null; name: string }[]>([]); */
+ /*  useEffect(() => {
     const fetChMessages = async() => {
       if(newRecipientMessages){
         const messagesData = await dispatch(getMessage({userId:userId, recipientId:recipientId}));
@@ -29,7 +29,7 @@ const Page = ({ params }: { params: { chat: string } }) => {
 
         }
     }}
-  },)
+  },) */
   useEffect(() => {
     const fetchUserChat = async () => {
       try {
