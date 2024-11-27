@@ -12,6 +12,7 @@ export const links = [
   { direction: '/users', label: 'другие пользователи', icon: <UserIcon /> },
   { direction: '/messages', label: 'Сообщения', icon: <MessageIcon /> },
   { direction: '/login', label: 'Выйти', icon: <ExitIcon /> },
+  { direction: '/', label: 'test', icon: <ExitIcon /> },
 ];
 
 const Navbar = () => {

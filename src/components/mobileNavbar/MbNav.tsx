@@ -11,7 +11,8 @@ export const mbLinks = [
   { direction: '/post', icon: <PostIcon /> },
   { direction: '/users', icon: <UserIcon /> },
   { direction: '/messages', icon: <MessageIcon /> },
-  { direction: '/login', icon: <ExitIcon /> },
+  { direction: '/login', icon: <ExitIcon /> },  
+  { direction: '/', icon: <ExitIcon /> },
 ];
 
 const MbNav = () => {
