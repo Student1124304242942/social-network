@@ -18,25 +18,32 @@ export async function middleware(req: NextRequest) {
     const { pathname } = req.nextUrl;
     const protectedPaths = ['/post', '/profile', '/users', '/messages'];
 
+    console.log('Запрашиваемый путь:', pathname);
+
     const userAuthenticated = await isAuthenticated(req);
+    console.log('Авторизованный пользователь:', userAuthenticated);
 
     if (!userAuthenticated && protectedPaths.includes(pathname)) {
         const url = req.nextUrl.clone();
         url.pathname = '/login';
+        console.log('Перенаправление на /login:', url);
         return NextResponse.redirect(url);
     }
 
     if (!userAuthenticated && pathname === '/') {
         const url = req.nextUrl.clone();
         url.pathname = '/login';
+        console.log('Перенаправление на /login с главной:', url);
         return NextResponse.redirect(url);
     }
 
     if (userAuthenticated && pathname === '/login') {
         const url = req.nextUrl.clone();
         url.pathname = '/profile';  
+        console.log('Перенаправление на /profile:', url);
         return NextResponse.redirect(url);
     }
 
     return NextResponse.next();
 }
+

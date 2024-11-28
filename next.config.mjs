@@ -5,6 +5,7 @@ const nextConfig = {
         unoptimized: true,
     },
     reactStrictMode: true,
+    pageExtensions: ["page.tsx", "api.ts"],
     swcMinify: true,
     webpack(config) {
         config.module.rules.push({
