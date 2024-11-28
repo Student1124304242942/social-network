@@ -1,3 +1,13 @@
-export default function Custom404() {
-    return <h1>404 - Page Not Found</h1>
-  }
+'use client';
+ 
+import Error from 'next/error';
+ 
+export default function NotFound() {
+  return (
+    <html lang="en">
+      <body>
+        <Error statusCode={404} />
+      </body>
+    </html>
+  );
+}
