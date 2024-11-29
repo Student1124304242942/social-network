@@ -6,7 +6,7 @@ import styles from './layout.module.css';
 import { ReactNode } from 'react';
 import MbNav from '@/components/mobileNavbar/MbNav';
 
-export default function Networklayout({ children }: { children: ReactNode }) {
+export default function NetworkLayout({ children }: { children: ReactNode }) {
   return (
     <div className={cn(styles.profileParent, 'bg-[#181818]')}>
         <header  className={cn("relative w-full flex items-center justify-center md:justify-between ", styles.header)}>
