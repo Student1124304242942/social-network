@@ -24,6 +24,9 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
+      <head>
+        <title>Yunus Social-network</title>
+      </head>
       <BrowserRouter>    
         <Provider store={network}>
           <body

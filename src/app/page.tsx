@@ -1,9 +1,5 @@
-import React from 'react'
+import {redirect} from 'next/navigation';
 
-const Page = () => {
-  return (
-    <div>r</div>
-  )
+export default function IndexPage() {
+  redirect('/login');
 }
-
-export default Page;

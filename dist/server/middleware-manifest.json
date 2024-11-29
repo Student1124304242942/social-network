@@ -10,15 +10,34 @@
       "page": "/",
       "matchers": [
         {
-          "regexp": "^/.*$",
-          "originalSource": "/:path*"
+          "regexp": "^(?:\\/(_next\\/data\\/[^/]{1,}))?(?:\\/(\\/?index|\\/?index\\.json))?[\\/#\\?]?$",
+          "originalSource": "/"
+        },
+        {
+          "regexp": "^(?:\\/(_next\\/data\\/[^/]{1,}))?\\/post(?:\\/((?:[^\\/#\\?]+?)(?:\\/(?:[^\\/#\\?]+?))*))?(.json)?[\\/#\\?]?$",
+          "originalSource": "/post/:path*"
+        },
+        {
+          "regexp": "^(?:\\/(_next\\/data\\/[^/]{1,}))?\\/profile(?:\\/((?:[^\\/#\\?]+?)(?:\\/(?:[^\\/#\\?]+?))*))?(.json)?[\\/#\\?]?$",
+          "originalSource": "/profile/:path*"
+        },
+        {
+          "regexp": "^(?:\\/(_next\\/data\\/[^/]{1,}))?\\/users(?:\\/((?:[^\\/#\\?]+?)(?:\\/(?:[^\\/#\\?]+?))*))?(.json)?[\\/#\\?]?$",
+          "originalSource": "/users/:path*"
+        },
+        {
+          "regexp": "^(?:\\/(_next\\/data\\/[^/]{1,}))?\\/messages(?:\\/((?:[^\\/#\\?]+?)(?:\\/(?:[^\\/#\\?]+?))*))?(.json)?[\\/#\\?]?$",
+          "originalSource": "/messages/:path*"
         }
       ],
       "wasm": [],
       "assets": [],
       "env": {
-        "__NEXT_BUILD_ID": "development",
-        "NEXT_SERVER_ACTIONS_ENCRYPTION_KEY": "lOphKn+KMLb4OyFG2Ve5oOQzbhDcfD8lv17CUT7yXlg="
+        "__NEXT_BUILD_ID": "xSvy8zphC9PGY1q7DTTq3",
+        "NEXT_SERVER_ACTIONS_ENCRYPTION_KEY": "CDTLmBm5Kc5kraqFbkuWTtkZQqcJ7Ijw/zy9yXZdeiI=",
+        "__NEXT_PREVIEW_MODE_ID": "74f33b52cf3105897b41049fb01983b4",
+        "__NEXT_PREVIEW_MODE_ENCRYPTION_KEY": "715d069728909a6f4c9be6896e8ccdb88ddf857593f00db06bffdcfab967ed3f",
+        "__NEXT_PREVIEW_MODE_SIGNING_KEY": "90803633681ab37d5d80de203eea300ed1280eb11e2211060ac4767460d9e985"
       }
     }
   },
