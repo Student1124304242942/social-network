@@ -21,6 +21,7 @@ const firebaseConfig = {
 
 const app = initializeApp(firebaseConfig);
 const db = getDatabase(app);
+const auth = getAuth(app);
 
 function convertBlobToBase64(blob: Blob): Promise<string> {
     return new Promise((resolve, reject) => {
@@ -494,6 +495,8 @@ export const userAPI = {
     deleteChat: Api.deleteChat,
     anotherUserChat: Api.anotherUserChat
 };
+
+export default auth;
 
 /* async updateAvatar(userId: string, file: File): Promise<string | undefined> {
     try {

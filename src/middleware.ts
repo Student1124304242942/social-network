@@ -1,30 +1,24 @@
 import { NextResponse, NextRequest } from "next/server";
-import { Api } from "@/firebase";
+import auth from "./firebase";
 
-const isAuthenticated = async (req: NextRequest): Promise<boolean> => {
-    const token = req.headers.get('Authorization')?.replace('Bearer ', '');
-    if (!token) return false;
-
-    try {
-        const user = await Api.getProfileInfo(token);
-        return Boolean(user);
-    } catch (error) {
-        console.error('Ошибка при проверке токена:', error);
-        return false;
-    }
+// Предполагается, что auth.currentUser вернет текущего аутентифицированного пользователя
+const isAuthenticated = (): boolean => {
+    return auth.currentUser !== null; // Предполагаем, что auth.currentUser возвращает текущего пользователя
 };
 
 export async function middleware(req: NextRequest) {
     const { pathname } = req.nextUrl;
     const protectedPaths = ['/post', '/profile', '/users', '/messages'];
-    const userAuthenticated = await isAuthenticated(req);
+    const userAuthenticated = isAuthenticated();
 
+    // Если пользователь не аутентифицирован и пытается зайти на защищенные страницы
     if (!userAuthenticated && protectedPaths.includes(pathname)) {
         const url = req.nextUrl.clone();
         url.pathname = '/login';
         return NextResponse.redirect(url);
     }
 
+    // Если пользователь на главной странице и не аутентифицирован
     if (!userAuthenticated && pathname === '/') {
         const url = req.nextUrl.clone();
         url.pathname = '/login';
@@ -32,6 +26,7 @@ export async function middleware(req: NextRequest) {
         return NextResponse.redirect(url);
     }
 
+    // Если пользователь аутентифицирован и пытается зайти на страницу входа
     if (userAuthenticated && pathname === '/login') {
         const url = req.nextUrl.clone();
         url.pathname = '/profile';
@@ -40,7 +35,6 @@ export async function middleware(req: NextRequest) {
 
     return NextResponse.next();
 }
-
 
 export const config = {
     matcher: ['/', '/post/:path*', '/profile/:path*', '/users/:path*', '/messages/:path*'],
