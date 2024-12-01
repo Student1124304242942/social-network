@@ -12,12 +12,11 @@ export const mbLinks = [
   { direction: '/users', icon: <UserIcon /> },
   { direction: '/messages', icon: <MessageIcon /> },
   { direction: '/login', icon: <ExitIcon /> },  
-  { direction: '/', icon: <ExitIcon /> },
 ];
 
 const MbNav = () => {
   return (
-    <nav className="flex justify-around p-4 bg-black shadow-lg fixed bottom-0 w-full rounded-t-lg">
+    <nav className="flex justify-around p-4 bg-black shadow-lg fixed bottom-0 w-full rounded-t-lg z-10">
       {mbLinks.map(({ direction, icon }) => (
         <LinkElement key={direction} direction={direction}>
           <div className="text-lg">{icon}</div>

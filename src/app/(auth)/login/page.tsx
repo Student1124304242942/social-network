@@ -9,7 +9,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { AppDispatch } from '@/components/reducer/network';
 import { RootState } from '@/components/reducer/network';
 import { useRouter } from 'next/navigation';
-
+import { redirect } from 'next/navigation';
 interface FormData {
   email: string;
   password: string;
@@ -27,8 +27,8 @@ const Page = () => {
   
   useEffect(() => {
     if (logged && userId){
-      router.push('/profile');
-    }
+      redirect('/profile');
+    } 
   }, [router, logged, userId])
   
 

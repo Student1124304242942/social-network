@@ -10,7 +10,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { AppDispatch } from '@/components/reducer/network';
 import { useRouter } from 'next/navigation';
 import { RootState } from '@/components/reducer/network';
-
+import { redirect } from 'next/navigation';
 interface FormData {
   email: string;
   password: string;
@@ -30,8 +30,8 @@ const Page = () => {
     password: '',
     firstName: '',
     lastName: '',
-    age: 0, // Changed here
-    skills: undefined, // Updated here
+    age: 0,  
+    skills: undefined,  
     country: '',
     customCountry: ''
   });
@@ -41,7 +41,7 @@ const Page = () => {
   
   useEffect(() => {
     if (logged ) {
-      router.push('/profile');
+      redirect('/profiles');
     }
   }, [router, logged]) 
 

@@ -1,6 +1,7 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import { loadState } from "./storage";
 import { Api, userAPI } from "@/firebase";
+import { Chat } from "../interfaces/Chat";
 
 export interface Recipient {
     recipientId: string;
@@ -13,13 +14,15 @@ interface RecipientState {
     loading: boolean; 
     messageReceived: boolean;
     newMessage:boolean;
+    currentHomie: Chat[];
 }
 
 const initialState: RecipientState = {
     homies: [],
     loading: false,
     messageReceived: false,
-    newMessage: false, // добавляем новый флаг
+    newMessage: false,
+    currentHomie: [],  
 };
 
  
@@ -68,14 +71,15 @@ export const sendMessage = createAsyncThunk(
 
 export const getMessage = createAsyncThunk(
     'homie/message',
-    async(params: {userId:string, recipientId:string}) => {
-        const {userId, recipientId} = params;
+    async (params: { userId: string; recipientId: string }) => {
+        const { userId, recipientId } = params;
         const message = await Api.getAnotherUserMessage(userId, recipientId);
-        if(message && message.length > 0){
-            return Array.isArray(message) ? message : [message];
+        if (message) {
+            return Array.isArray(message)? message: [message];  
         }
+        return null;  
     }
-)
+);
 
 const chatSlice = createSlice({
     name: 'chats',
@@ -114,7 +118,8 @@ const chatSlice = createSlice({
         builder.addCase(getMessage.fulfilled, (state, action) => {
             if (action.payload) {
                 state.messageReceived = true;
-                state.newMessage = true; // Здесь устанавливаем флаг о том, что пришло новое сообщение
+                state.newMessage = true;
+                state.currentHomie = action.payload; 
             }
         });
         builder.addCase(getMessage.rejected, (state) => {

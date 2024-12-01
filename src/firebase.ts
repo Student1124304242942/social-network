@@ -1,5 +1,5 @@
 import { initializeApp } from "firebase/app";
-import { getAuth } from "firebase/auth";
+import { Auth, getAuth } from "firebase/auth";
 import { child, get, getDatabase, ref, set } from "firebase/database";
 import { createUserWithEmailAndPassword, signInWithEmailAndPassword } from "firebase/auth";
 import { Register } from "./components/interfaces/register";
@@ -9,6 +9,7 @@ import { Chat } from "./components/interfaces/Chat";
 import { Recipient } from "./components/reducer/chat";
 import { userProfile } from "./components/interfaces/userProfile";
 import { Homie } from "./app/(nentwork)/messages/page";
+import { signOut } from "firebase/auth";
 const firebaseConfig = {
     apiKey: "AIzaSyApfC5xQ2RPwa4KAVWszUpZi-8nk0XCySQ",
     authDomain: "social-network-ea6a9.firebaseapp.com",
@@ -53,6 +54,13 @@ export const Api = {
         const profileData = snapshot.val();
         if (profileData === null) return;
         return profileData;
+    },
+    async isUserLogged(): Promise<string[] | null> {
+        const dbRef = ref(db);
+        const snapshot = await get(child(dbRef, 'profiles'));
+        const profiles = snapshot.val();
+        if (profiles === null) return null;
+        return Object.keys(profiles);  
     },
     async getUserInfo(profileId: string | null) {
         const snapshot = await get(child(ref(db), `users/${profileId}`));
@@ -338,7 +346,7 @@ export const Api = {
                         sentAt: new Date().toISOString()
                     };
     
-                    const chatTextArray = currentChat.chat?.text || []; // используем пустой массив как дефолтное значение
+                    const chatTextArray = currentChat.chat?.text || [];  
     
                     const updatedChat = {
                         ...currentChat,
@@ -385,6 +393,9 @@ export const Api = {
             console.error("Error deleting post:", error);
             throw error;
         }
+    },
+    async logOut(auth:Auth) {
+        await signOut(auth);
     },
     async correctPost(userId: string | undefined, postId: number, updateText: string, updateTitle: string) {
         try {
@@ -437,8 +448,6 @@ export const Api = {
                             headers: { 'Content-Type': 'application/json' },
                             body: JSON.stringify({ image: profileImageBase64 })
                         });
-    
-                        // Check response status
                         if (!response.ok) {
                             const errorText = await response.text(); // Get the raw response text
                             console.error("Upload error for profile image:", errorText);
@@ -459,8 +468,6 @@ export const Api = {
                             headers: { 'Content-Type': 'application/json' },
                             body: JSON.stringify({ image: avatarBase64 })
                         });
-    
-                        // Check response status
                         if (!response.ok) {
                             const errorText = await response.text(); // Get the raw response text
                             console.error("Upload error for avatar:", errorText);
@@ -493,23 +500,11 @@ export const userAPI = {
     deletePost: Api.deletePost,
     addChat: Api.addChat,
     deleteChat: Api.deleteChat,
-    anotherUserChat: Api.anotherUserChat
+    anotherUserChat: Api.anotherUserChat,
+    logOut: Api.logOut
 };
 
 export default auth;
-
-/* async updateAvatar(userId: string, file: File): Promise<string | undefined> {
-    try {
-        const avatarRef = storageRef(storage, `avatars/${userId}/${file.name}`);
-        await uploadBytes(avatarRef, file);
-        const avatarUrl = await getDownloadURL(avatarRef);
-        await set(ref(db, `profiles/${userId}/avatar`), avatarUrl); 
-        return avatarUrl;  
-    } catch (error) {
-        console.error('Error updating avatar:', error); // Log the error for debugging
-        throw error; // Throw the error after logging it
-    }
-},
- */
+ 
 
  

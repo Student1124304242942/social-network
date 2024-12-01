@@ -31,8 +31,7 @@ const Page = () => {
   };
 
   const addPost = async (e: React.FormEvent) => {
-    e.preventDefault();
-    
+    e.preventDefault();    
     if (!isValid.title) {
       titleRef.current?.focus();
       return;
@@ -42,13 +41,10 @@ const Page = () => {
       textRef.current?.focus();
       return;
     }
-
-    console.log('Submitting post:', values);
     await sendPost();
     setValues({ title: '', text: '' });
     setIsValid({ title: false, text: false });
   };
-
   const sendPost = async () => {
     const { text, title } = values;
     await dispatch(post({ title, text }));

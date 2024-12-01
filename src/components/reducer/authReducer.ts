@@ -1,7 +1,7 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import { Register } from "../interfaces/register";
-import {  userAPI } from "@/firebase";
-
+import {   userAPI } from "@/firebase";
+import { getAuth } from "firebase/auth";
 interface AuthState {
     userId: string | null;
     logged: boolean;
@@ -32,7 +32,22 @@ export const login = createAsyncThunk(
         }
     }
 );
- 
+
+export const logOutUser = createAsyncThunk(
+    'user/logOut',
+    async ( ) => {
+        try {
+            const auth = getAuth();
+            await userAPI.logOut(auth);
+            return true; 
+        } catch (e) {
+            if (e instanceof Error) {
+                return alert('ВЫ НЕ ВЫЙДЕТЕ ОТ СЮДА');
+            }
+        }
+    }
+);
+
 export const register = createAsyncThunk(
     'user/register',
     async (params: {email: string, firstName: string, lastName: string, password: string, age:number, skills: string[] | undefined, country:string}, thunkAPI) => {
@@ -86,7 +101,13 @@ export const userSlice = createSlice({
             })
         builder.addCase(register.rejected, (state, action) => {
                 state.registerErrorMessage =  action.error.message;
-           });
+        })
+        builder.addCase(logOutUser.fulfilled, (state, action) => {
+            if(action.payload){
+                state.logged = false
+                state.userId = null
+            }
+        })
     },
 });
 
