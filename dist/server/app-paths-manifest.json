@@ -1,9 +1,13 @@
 {
-  "/page": "app/page.js",
+  "/_not-found/page": "app/_not-found/page.js",
   "/favicon.ico/route": "app/favicon.ico/route.js",
+  "/page": "app/page.js",
+  "/(auth)/register/page": "app/(auth)/register/page.js",
+  "/(nentwork)/messages/[chat]/page": "app/(nentwork)/messages/[chat]/page.js",
+  "/(nentwork)/post/page": "app/(nentwork)/post/page.js",
   "/(auth)/login/page": "app/(auth)/login/page.js",
   "/(nentwork)/profile/page": "app/(nentwork)/profile/page.js",
-  "/(nentwork)/post/page": "app/(nentwork)/post/page.js",
-  "/(nentwork)/users/[userProfile]/page": "app/(nentwork)/users/[userProfile]/page.js",
-  "/(nentwork)/users/page": "app/(nentwork)/users/page.js"
+  "/(nentwork)/messages/page": "app/(nentwork)/messages/page.js",
+  "/(nentwork)/users/page": "app/(nentwork)/users/page.js",
+  "/(nentwork)/users/[userProfile]/page": "app/(nentwork)/users/[userProfile]/page.js"
 }

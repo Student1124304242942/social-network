@@ -18,7 +18,6 @@ const Page = ({ params }: { params: { chat: string } }) => {
   const [loading, setLoading] = useState(true);
   const [messageInput, setMessageInput] = useState<string>('');
   const [isSending, setIsSending] = useState<boolean>(false);
-  const [isGetting, setIsGetting] = useState<boolean>(false);
   const [chatName, setChatName] = useState<string>('Чат');
   const [avatarUrl, setAvatarUrl] = useState<string | null>(null);
   const [lastSentMessage, setLastSentMessage] = useState<string | null>(null);  
@@ -26,7 +25,6 @@ const Page = ({ params }: { params: { chat: string } }) => {
 
   useEffect(() => {
     const fetchHomiesChat = async () => {
-      setIsGetting(false);
       const actionResult = await dispatch(getMessage({ userId: userId, recipientId: recipientId }));
       if (getMessage.fulfilled.match(actionResult)) {
         const homiesMessages = actionResult.payload;
@@ -39,7 +37,6 @@ const Page = ({ params }: { params: { chat: string } }) => {
           }))));
         }
       }
-      setIsGetting(true);
     }
 
     fetchHomiesChat();
