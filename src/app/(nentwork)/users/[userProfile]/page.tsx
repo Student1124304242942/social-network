@@ -1,29 +1,30 @@
+'use client';
 import HomiesProfile from '@/components/HomiesProfile/HomiesProfile';
+import { userProfile } from '@/components/interfaces/userProfile';
 import { Api } from '@/firebase';
+import {  useEffect, useState } from 'react';
 
-export async function generateStaticParams() {
-  const profiles = await Api.getProfiles();
-  if (!profiles) {
-    return [];
-  }
-  return profiles.map((profile) => ({
-    userProfile: profile.id,
-  }));
-}
-
-
-const Page = async ({ params }: { params: { userProfile: string } }) => {
+const Page =  ({ params }: { params: { userProfile: string } }) => {
   const id = params.userProfile as string;
-  const userData = await Api.getAnotherProfile(id);
+  const [userData, setUserData] = useState<userProfile[]>([]);
+  useEffect(() => {
+    const userProfileData = async () => {
+      const data = await Api.getAnotherProfile(id);
+      if(data){
+        setUserData(data)
+      }
+    }
+    userProfileData();
+  }, [id])
   if (!userData || userData.length === 0) {
-    return {
-      notFound: true,
-    };
+    return <div className="">
+      Произошла ошибка
+    </div>
   }
 
   return (
     userData.map(user => (
-        <HomiesProfile
+      <HomiesProfile
         key={user.id}
         name={user.name}
         avatar={user.avatar}
@@ -38,4 +39,3 @@ const Page = async ({ params }: { params: { userProfile: string } }) => {
 }
 
 export default Page;
- 
