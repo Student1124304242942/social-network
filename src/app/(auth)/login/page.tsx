@@ -15,7 +15,7 @@ interface FormData {
   password: string;
 }
 
-const Page = () => {
+const LoginPage = () => {
   const dispatch = useDispatch<AppDispatch>();
   const router = useRouter();
   const [formData, setFormData] = useState<FormData>({
@@ -91,6 +91,6 @@ const Page = () => {
   );
 }
 
-export default Page;
+export default LoginPage;
 
  

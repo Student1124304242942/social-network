@@ -22,7 +22,7 @@ interface FormData {
   customCountry: string;
 }
 
-const Page = () => {
+const RegisterPage = () => {
   const router = useRouter();
   const dispatch = useDispatch<AppDispatch>();
   const [formData, setFormData] = useState<FormData>({
@@ -181,6 +181,6 @@ const Page = () => {
   );
 };
 
-export default Page;
+export default RegisterPage;
 
  

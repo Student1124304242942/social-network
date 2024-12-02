@@ -15,7 +15,7 @@ import { useDispatch } from 'react-redux';
 import { AppDispatch } from '@/components/reducer/network';
 import { editProfile } from '@/components/reducer/profile';
 
-const Page = () => {
+const ProfilePage = () => {
   const dispatch = useDispatch<AppDispatch>();
   const [profileData, setProfileData] = useState<null | ProfileCardProps>(null);
   const [posts, setPosts] = useState<Post[]>([]);
@@ -190,5 +190,5 @@ const Page = () => {
   );
 }
 
-export default Page;
+export default ProfilePage;
 

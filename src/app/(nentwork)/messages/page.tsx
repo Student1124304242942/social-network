@@ -10,7 +10,7 @@ export interface Homie {
   avatarRef: string;
 }
 
-const Page = () => {
+const MessagePage = () => {
   const [homies, setHomies] = useState<Homie[]>([]);
   
   const handleUserChat = async () => {
@@ -50,5 +50,5 @@ const Page = () => {
   );
 };
 
-export default Page;
+export default MessagePage;
 

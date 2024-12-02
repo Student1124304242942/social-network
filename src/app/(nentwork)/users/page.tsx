@@ -8,7 +8,7 @@ import { H } from '@/components/Htag/H';
 import SearchInput from '@/Icons/search.svg';  
 import { userSliceActions } from '@/components/reducer/users';
 
-const Page = () => {
+const UsersPage = () => {
   const dispatch = useDispatch<AppDispatch>();
   const users = useSelector((state: RootState) => state.users.users);
   const [isLoading, setIsLoading] = useState(true);
@@ -70,4 +70,4 @@ const Page = () => {
   );
 };
 
-export default Page;
+export default UsersPage;

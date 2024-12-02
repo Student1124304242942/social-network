@@ -17,7 +17,7 @@ export interface FormValidation {
   text: boolean;
 }
 
-const Page = () => {
+const PostPage = () => {
   const dispatch = useDispatch<AppDispatch>();
   const titleRef = useRef<HTMLInputElement>(null);
   const textRef = useRef<HTMLTextAreaElement>(null);
@@ -88,4 +88,4 @@ const Page = () => {
   );
 };
 
-export default Page;
+export default PostPage;
