@@ -1,6 +1,8 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-    distDir: 'dist',
+    experimental: {
+        serverActions: true,
+    },
     images: {
         unoptimized: true,
     },

@@ -71,6 +71,18 @@
       "static/chunks/894-939a11287fe1c3fb.js",
       "static/chunks/app/(nentwork)/layout-ab9611113bde8696.js"
     ],
+    "/(nentwork)/post/page": [
+      "static/chunks/webpack-56c020f79a49ef5f.js",
+      "static/chunks/fd9d1056-1a9b545a9adefbfc.js",
+      "static/chunks/23-59680646b041a6b8.js",
+      "static/chunks/main-app-89afb01d767eca10.js",
+      "static/chunks/457b8330-e274e1ab1a6c46d4.js",
+      "static/chunks/d441faa4-48d6f4ad0c74305c.js",
+      "static/chunks/938-5decefdb22a87cdf.js",
+      "static/chunks/562-5acd2ef1f2c95840.js",
+      "static/chunks/521-fb2cd6a117ee3ae0.js",
+      "static/chunks/app/(nentwork)/post/page-fb6f2fd2bc9f9437.js"
+    ],
     "/(auth)/register/page": [
       "static/chunks/webpack-56c020f79a49ef5f.js",
       "static/chunks/fd9d1056-1a9b545a9adefbfc.js",
@@ -97,18 +109,6 @@
       "static/chunks/894-939a11287fe1c3fb.js",
       "static/chunks/521-fb2cd6a117ee3ae0.js",
       "static/chunks/app/(nentwork)/messages/page-2b2a656ea718eac8.js"
-    ],
-    "/(nentwork)/post/page": [
-      "static/chunks/webpack-56c020f79a49ef5f.js",
-      "static/chunks/fd9d1056-1a9b545a9adefbfc.js",
-      "static/chunks/23-59680646b041a6b8.js",
-      "static/chunks/main-app-89afb01d767eca10.js",
-      "static/chunks/457b8330-e274e1ab1a6c46d4.js",
-      "static/chunks/d441faa4-48d6f4ad0c74305c.js",
-      "static/chunks/938-5decefdb22a87cdf.js",
-      "static/chunks/562-5acd2ef1f2c95840.js",
-      "static/chunks/521-fb2cd6a117ee3ae0.js",
-      "static/chunks/app/(nentwork)/post/page-fb6f2fd2bc9f9437.js"
     ],
     "/(nentwork)/profile/page": [
       "static/chunks/webpack-56c020f79a49ef5f.js",
