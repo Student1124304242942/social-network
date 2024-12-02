@@ -8,7 +8,7 @@ import { sendMessage } from '@/components/reducer/chat';
 import Message from '../Message';
 import { getMessage } from '@/components/reducer/chat';
 
-const Page = ({ params }: { params: { chat: string } }) => {
+const ChatPage = ({ params }: { params: { chat: string } }) => {
   const id = params.chat as string;
   const dispatch = useDispatch<AppDispatch>();
   const recipientId = id.slice(0, 28);
@@ -143,4 +143,4 @@ const Page = ({ params }: { params: { chat: string } }) => {
   );
 };
 
-export default Page;
+export default ChatPage;

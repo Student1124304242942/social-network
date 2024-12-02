@@ -4,7 +4,7 @@ import { userProfile } from '@/components/interfaces/userProfile';
 import { Api } from '@/firebase';
 import {  useEffect, useState } from 'react';
 
-const Page =  ({ params }: { params: { userProfile: string } }) => {
+const UserProfilePage =  ({ params }: { params: { userProfile: string } }) => {
   const id = params.userProfile as string;
   const [userData, setUserData] = useState<userProfile[]>([]);
   useEffect(() => {
@@ -38,4 +38,4 @@ const Page =  ({ params }: { params: { userProfile: string } }) => {
   );
 }
 
-export default Page;
+export default UserProfilePage;
