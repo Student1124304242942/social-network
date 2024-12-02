@@ -2,7 +2,7 @@
 const nextConfig = {
     distDir: 'dist',
     images: {
-        unoptimized: mode === "export",
+        unoptimized: true,
     },
     webpack(config) {
         config.module.rules.push({
