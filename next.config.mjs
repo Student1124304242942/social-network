@@ -2,10 +2,8 @@
 const nextConfig = {
     distDir: 'dist',
     images: {
-        unoptimized: true,
+        unoptimized: mode === "export",
     },
-    reactStrictMode: true,
-    swcMinify: true,
     webpack(config) {
         config.module.rules.push({
             test: /\.svg$/,
