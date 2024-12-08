@@ -107,11 +107,6 @@ const chatSlice = createSlice({
                 state.homies = action.payload;
             }
         });
-        builder.addCase(sendMessage.rejected, (state, action) => {
-            if(action.payload){
-                console.log(action.payload)
-            }
-        });
         builder.addCase(getMessage.pending, (state) => {
             state.loading = true;
         });

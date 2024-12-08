@@ -1,4 +1,4 @@
-import React from 'react';
+ 
 import { RecipientProps } from './Recipient.props';
 import { H } from '../Htag/H';
  
