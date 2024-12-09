@@ -42,28 +42,29 @@ const UsersPage = () => {
         </div>
       </div>
       <ul className="flex flex-col gap-3">
-        {isLoading ? (  
-          <p className="text-center text-gray-500">Loading...</p>
-        ) : users.length > 0 ? (
-          users
-            .filter(user => {
-              const userName = user.name.toLowerCase();
-              const userSkills = user.skills.join(' ').toLowerCase();  
-              return userName.includes(searchItem) || userSkills.includes(searchItem);
-            })
-            .map(user => (
-              <UserCart
-                key={user.uid}
-                id={user.uid}
-                userName={user.name}
-                userSkills={user.skills}
-                userAvatar={user.avatar}
-              />
-            ))
-        ) : (
-          <p className="text-center text-gray-500">No users found.</p>
-        )}
-      </ul>
+  {isLoading ? (  
+    <p className="text-center text-gray-500">Loading...</p>
+  ) : users.length > 0 ? (
+    users
+      .filter(user => {
+        const userName = user.name.toLowerCase();
+        const userSkills = Array.isArray(user.skills) ? user.skills.join(' ').toLowerCase() : '';  
+        return userName.includes(searchItem) || userSkills.includes(searchItem);
+      })
+      .map(user => (
+        <UserCart
+          key={user.uid}
+          id={user.uid}
+          userName={user.name}
+          userSkills={user.skills}
+          userAvatar={user.avatar}
+        />
+      ))
+  ) : (
+    <p className="text-center text-gray-500">No users found.</p>
+  )}
+</ul>
+
     </div>
   );
 };
