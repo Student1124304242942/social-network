@@ -39,7 +39,7 @@ const RegisterPage = () => {
   
   useEffect(() => {
     if (logged ) {
-      router('/profiles');
+      router('/');
     }
   }, [router, logged]) 
 

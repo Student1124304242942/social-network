@@ -24,7 +24,7 @@ const LoginPage = () => {
   const {logged, userId} = useSelector((s:RootState) =>  s.user);
   
   useEffect(() => {
-    if (logged && userId){
+    if (logged){
       router('/');
     } 
   }, [router, logged, userId])
