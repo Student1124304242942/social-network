@@ -1,8 +1,9 @@
 {
-    "hosting": {
-      "site": "social-network-ea6a9-c91dc",
-      "public": "public"
-    }
-    
+  "hosting": {
+    "site": "social-network-ea6a9-c91dc",
+    "public": "public"
+  },
+  "database": {
+    "rules": "database.rules.json"
   }
-   
+}

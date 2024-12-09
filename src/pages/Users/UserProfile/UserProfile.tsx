@@ -5,6 +5,7 @@ import { Api } from '../../../firebase';
 import {  useEffect, useState } from 'react';
 
 const UserProfilePage =  () => {
+  
   const { id } = useParams<{ id: string }>();
   const [userData, setUserData] = useState<userProfile[]>([]);
   useEffect(() => {
