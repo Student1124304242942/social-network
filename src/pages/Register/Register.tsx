@@ -171,7 +171,7 @@ const RegisterPage = () => {
           </div>
           <Button type="submit">Зарегистрироваться</Button>
           <div className="text-center">
-            <p>Уже есть аккаунт? <Link to="/login" className="text-blue-500 sm:text-[16px] text-[14px] 3xl:text-[20px]">Войти</Link></p>
+            <p>Уже есть аккаунт? <Link to="/auth/register" className="text-blue-500 sm:text-[16px] text-[14px] 3xl:text-[20px]">Войти</Link></p>
           </div>
         </form>
       </div>

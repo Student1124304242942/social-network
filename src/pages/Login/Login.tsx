@@ -79,7 +79,7 @@ const LoginPage = () => {
           </div>
           <div className='w-full'>
             <div className="flex justify-between mb-6">
-              <Link to='/register' className="text-gray-400 hover:text-black transition duration-500">нету аккаунта ?</Link>
+              <Link to='/auth/register' className="text-gray-400 hover:text-black transition duration-500">нету аккаунта ?</Link>
             </div>
             <Button>Войти</Button>
           </div>
