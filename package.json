@@ -12,6 +12,8 @@
   "dependencies": {
     "@firebasegen/default": "file:generated/javascript/default",
     "@reduxjs/toolkit": "^2.4.0",
+    "@vercel/blob": "^0.27.0",
+    "axios": "^1.7.9",
     "classnames": "^2.5.1",
     "firebase": "^10.14.1",
     "react": "^18.3.1",

@@ -126,22 +126,22 @@ const ChatPage = () => {
                     <div>Нет сообщений для этого чата.</div>
                 )}
             </main>
-            <footer className="flex p-4 bg-white border-t">
-                <input
-                    value={messageInput}
-                    onChange={handleMessageChange}
-                    onKeyDown={handleKeyDown}
-                    type="text"
-                    className="flex-1 border rounded-lg p-2"
-                    placeholder="Введите сообщение..."
-                />
-                <button
-                    onClick={handleClick}
-                    className="ml-2 bg-blue-500 text-white py-2 px-4 rounded-lg"
-                >
-                    Отправить
-                </button>
-            </footer>
+            <footer className="flex p-4 bg-white border-t md:mb-0 mb-4">  
+    <input
+        value={messageInput}
+        onChange={handleMessageChange}
+        onKeyDown={handleKeyDown}
+        type="text"
+        className="flex-1 border rounded-lg p-2"
+        placeholder="Введите сообщение..."
+    />
+    <button
+        onClick={handleClick}
+        className="ml-2 bg-blue-500 text-white py-2 px-4 rounded-lg"
+    >
+        Отправить
+    </button>
+</footer>
         </div>
     );
 };

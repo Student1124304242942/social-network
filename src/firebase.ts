@@ -10,6 +10,7 @@ import { Recipient } from "./components/reducer/chat";
 import { userProfile } from "./components/interfaces/userProfile";
 import { Homie } from "./pages/Messages/Messages";
 import { signOut } from "firebase/auth";
+import axios from "axios";
 const firebaseConfig = {
   apiKey: "AIzaSyApfC5xQ2RPwa4KAVWszUpZi-8nk0XCySQ",
   authDomain: "social-network-ea6a9.firebaseapp.com",
@@ -25,27 +26,22 @@ const app = initializeApp(firebaseConfig);
 const db = getDatabase(app);
 const auth = getAuth(app);
 
-function convertBlobToBase64(blob: Blob): Promise<string> {
-    return new Promise((resolve, reject) => {
-        // Проверка, является ли blob объектом и имеет ли он нужный тип
-        if (!(blob instanceof Blob)) {
-            return reject(new TypeError("Argument is not a Blob object"));
+async function uploadToVercelStorage(file: Blob): Promise<string> {
+    const formData = new FormData();
+    formData.append('file', file);
+
+    const response = await axios.post( 'https://2lubf67slxkxrsys.public.blob.vercel-storage.com', formData, {
+        headers: {
+            'Authorization': 'vercel_blob_rw_2LUBF67SlxKxrsys_HAwT3TCaRFFpcYeuoKdehuchLjQ8BF', // Replace with your actual token
+            'Content-Type': 'multipart/form-data',
         }
-
-        const reader = new FileReader();
-        reader.readAsDataURL(blob);
-
-        reader.onloadend = () => {
-            // Убедитесь, что reader.result имеет правильный тип
-            if (typeof reader.result === 'string') {
-                resolve(reader.result);
-            } else {
-                reject(new TypeError("FileReader result is not a string"));
-            }
-        };
-
-        reader.onerror = (error) => reject(error);
     });
+
+    if (response.data && response.data.fileUrl) {
+        return response.data.fileUrl;  
+    }
+
+    throw new Error('Failed to upload file to Vercel Storage');
 }
 
 
@@ -221,7 +217,7 @@ export const Api = {
             const profileData = await Api.getProfileInfo(userId);
     
             if (!profileData || !profileData.chats) {
-                return null; // Return null if profileData or chats is undefined
+                return null;  
             }
     
             return Object.keys(profileData.chats).map(key => ({
@@ -437,50 +433,23 @@ export const Api = {
                 const userData = await Api.getUserInfo(userID);
                 const dbProfile = ref(db, 'profiles/' + userID);
                 const dbUsers = ref(db, 'users/' + userID);
+    
                 if (profileData) {
                     await set(dbProfile, { ...profileData, name: name, country: country, skills: skills, age: age });
                     await set(dbUsers, { ...userData, name: name, skills: skills });
     
                     let profileImageUrl: string | null = null;
                     if (profileImage) {
-                        const profileImageBase64 = await convertBlobToBase64(profileImage);
-                        const response = await fetch('./api/upload', {
-                            method: 'POST',
-                            headers: { 'Content-Type': 'application/json' },
-                            body: JSON.stringify({ image: profileImageBase64 })
-                        });
-                        if (!response.ok) {
-                            const errorText = await response.text(); // Get the raw response text
-                            console.error("Upload error for profile image:", errorText);
-                            throw new Error("Failed to upload profile image");
-                        }
-    
-                        const data = await response.json();
-                        profileImageUrl = data.url;
+                        profileImageUrl = await uploadToVercelStorage(profileImage);
+                        await set(dbProfile, { ...profileData, profileImage: profileImageUrl });
                     }
-    
-                    await set(dbProfile, { ...profileData, profileImage: profileImageUrl });
     
                     let avatarUrl: string | null = null;
                     if (avatar) {
-                        const avatarBase64 = await convertBlobToBase64(avatar);
-                        const response = await fetch('./api/upload', {
-                            method: 'POST',
-                            headers: { 'Content-Type': 'application/json' },
-                            body: JSON.stringify({ image: avatarBase64 })
-                        });
-                        if (!response.ok) {
-                            const errorText = await response.text(); // Get the raw response text
-                            console.error("Upload error for avatar:", errorText);
-                            throw new Error("Failed to upload avatar");
-                        }
-    
-                        const data = await response.json();
-                        avatarUrl = data.url;
+                        avatarUrl = await uploadToVercelStorage(avatar);
+                        await set(dbProfile, { ...profileData, avatar: avatarUrl });
+                        await set(dbUsers, { ...userData, avatar: avatarUrl });
                     }
-    
-                    await set(dbProfile, { ...profileData, avatar: avatarUrl });
-                    await set(dbUsers, { ...userData, avatar: avatarUrl });
     
                     return true;    
                 }
