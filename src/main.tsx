@@ -8,7 +8,6 @@ import { network } from './components/reducer/network';
 import AuthLayout from './layouts/Auth/Auth';
 import LoginPage from './pages/Login/Login';
 import RegisterPage from './pages/Register/Register';
-import { RequireAuth } from './components/reducer/RequireAuth';
 import UserProfilePage from './pages/Users/UserProfile/UserProfile';
 import MessagePage from './pages/Messages/Messages';
 import NetworkLayout from './layouts/Menu/Menu';
