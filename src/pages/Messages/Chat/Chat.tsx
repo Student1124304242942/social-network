@@ -72,27 +72,34 @@ const ChatPage = () => {
     const handleMessageChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         setMessageInput(e.target.value);
     };
-
     const handleClick = async () => {
         if (messageInput.trim() === '' || isSending) return;
+    
         setIsSending(true);
+    
         const newMessageToChat = await dispatch(
             sendMessage({ userId: userId, recipientId: recipientId, message: messageInput })
         );
+    
         if (newMessageToChat && newMessageToChat.payload) {
             const message = newMessageToChat.payload;
             const lastMessage = message[message.length - 1];
+    
+            const userName = messages.length > 0 ? messages[0].name : 'Unknown User'; // Fixed: Added semicolon
+    
             setMessages(prevMessages => [
                 ...prevMessages,
-                { text: lastMessage, avatar: avatarUrl, name: messages[0].name, id: Date.now() }
+                { text: lastMessage, avatar: avatarUrl, name: userName, id: Date.now() }
             ]);
+    
             setMessageInput('');
-            setLastSentMessage(lastMessage); // обновите состояние при отправке
+            setLastSentMessage(lastMessage);
         }
-
+    
         setIsSending(false);
     };
-
+    
+    
     const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
         if (e.key === 'Enter') {
             e.preventDefault();

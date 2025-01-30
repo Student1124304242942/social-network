@@ -21,7 +21,7 @@ import ChatPage from './pages/Messages/Chat/Chat';
 const router = createHashRouter([
   {
     path: '/',
-    element: <RequireAuth><NetworkLayout/></RequireAuth>,
+    element: <NetworkLayout/> ,
     children: [
       {
         path: '/',
