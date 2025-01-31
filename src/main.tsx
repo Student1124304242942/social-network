@@ -17,10 +17,11 @@ import PostPage from './pages/Post/Post';
 import UsersPage from './pages/Users/User';
 import { Error } from './pages/ErrorPage/ErrorPage';
 import ChatPage from './pages/Messages/Chat/Chat';
+import { RequireAuth } from './components/reducer/RequireAuth';
 const router = createHashRouter([
   {
     path: '/',
-    element: <NetworkLayout/> ,
+    element:  <RequireAuth><NetworkLayout/></RequireAuth> ,
     children: [
       {
         path: '/',
